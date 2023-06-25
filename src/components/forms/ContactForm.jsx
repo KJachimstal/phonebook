@@ -1,9 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/operations';
+import { addContact } from '../../redux/operations';
+import { useState } from 'react';
+import { selectContacts } from 'redux/selectors';
 
-export const ContactForm = ({ name, number, onNameChange, onNumberChange }) => {
+export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(store => store.contacts.items);
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -25,6 +29,14 @@ export const ContactForm = ({ name, number, onNameChange, onNumberChange }) => {
     form.reset();
   };
 
+  const handleChangeName = async event => {
+    await setName(event.target.value);
+  };
+
+  const handleChangeNumber = async event => {
+    await setNumber(event.target.value);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="comtainer">
       <label htmlFor="name" className="form-label">
@@ -38,7 +50,7 @@ export const ContactForm = ({ name, number, onNameChange, onNumberChange }) => {
           id="name"
           className="form-input"
           value={name}
-          onChange={onNameChange}
+          onChange={handleChangeName}
         />
       </label>
       <label htmlFor="number" className="form-label">
@@ -52,7 +64,7 @@ export const ContactForm = ({ name, number, onNameChange, onNumberChange }) => {
           id="phone"
           className="form-input"
           value={number}
-          onChange={onNumberChange}
+          onChange={handleChangeNumber}
         />
       </label>
       <button type="submit" className="form-button">
