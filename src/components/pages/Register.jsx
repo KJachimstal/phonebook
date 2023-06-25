@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signIn } from 'redux/session';
+import { signUp } from 'redux/session';
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -24,11 +24,12 @@ export const Register = () => {
     event.preventDefault();
     const form = event.target;
     const userCredentials = {
+      name: form.elements.name.value,
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
 
-    dispatch(userCredentials);
+    dispatch(signUp(userCredentials));
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -38,6 +39,7 @@ export const Register = () => {
           type="text"
           name="name"
           id="name"
+          required
           placeholder="Enter name"
           value={name}
           onChange={handleNameChange}
@@ -49,6 +51,7 @@ export const Register = () => {
           type="text"
           name="email"
           id="email"
+          required
           placeholder="Enter email"
           value={email}
           onChange={handleEmailChange}
@@ -60,6 +63,7 @@ export const Register = () => {
           type="password"
           name="password"
           id="password"
+          required
           placeholder="Enter password"
           value={password}
           onChange={handlePasswordChange}
