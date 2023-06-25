@@ -45,3 +45,27 @@ export const singOut = createAsyncThunk(
     }
   }
 );
+
+export const signUp = createAsyncThunk(
+  'session/signUp',
+  async ({ name, email, password }, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        '/users/signup',
+        {
+          name,
+          email,
+          password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
