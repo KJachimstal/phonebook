@@ -4,20 +4,21 @@ import {
   selectContacts,
   selectFilter,
   selectContactsIsLoading,
+  selectCurrentUser,
 } from 'redux/selectors';
 import { fetchContacts, deleteContact } from 'redux/operations';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
   const [filteredContacts, setFilteredContacts] = useState([]);
+  const currentUser = useSelector(selectCurrentUser);
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectContactsIsLoading);
 
   useEffect(() => {
-    dispatch(fetchContacts());
-    console.log('dispatch');
-  }, [dispatch]);
+    dispatch(fetchContacts(currentUser.token));
+  }, [dispatch, currentUser]);
 
   useEffect(() => {
     setFilteredContacts(
@@ -25,7 +26,6 @@ export const Contacts = () => {
         contact.name.toLowerCase().includes(filter.toLowerCase())
       )
     );
-    console.log('filter');
   }, [filter, contacts]);
 
   if (isLoading) {
@@ -36,7 +36,13 @@ export const Contacts = () => {
     return <h4>No contacts available</h4>;
   }
 
-  const handleDelete = contactId => dispatch(deleteContact(contactId));
+  const handleDelete = contactId => {
+    const contact = {
+      id: contactId,
+      token: currentUser.token,
+    };
+    dispatch(deleteContact(contact));
+  };
 
   return (
     <ul className="contacts-list">
@@ -44,11 +50,7 @@ export const Contacts = () => {
         <li key={id} className="contact-item">
           <span className="contact-name">{name}</span>
           <span className="contact-phone">{phone}</span>
-          <button
-            type="submit"
-            onClick={() => handleDelete(id)}
-            className="contact-button"
-          >
+          <button type="submit" onClick={() => handleDelete(id)} className="">
             Delete
           </button>
         </li>

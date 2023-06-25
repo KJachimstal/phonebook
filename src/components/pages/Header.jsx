@@ -16,7 +16,9 @@ const Header = () => {
   return (
     <div>
       <nav>
-        <NavLink to="/">Phonebook</NavLink>
+        <NavLink to="/" className="font-bold underline">
+          Phonebook
+        </NavLink>
         {!isSignedIn ? (
           <>
             <NavLink to="/login">Login</NavLink>
