@@ -47,7 +47,7 @@ export const Contacts = () => {
   };
 
   return (
-    <ul className="flex flex-wrap gap-4">
+    <ul className="flex flex-wrap justify-center gap-4 mx-20 py-6">
       {filteredContacts.map(({ name, number, id }) => (
         <li
           key={id}

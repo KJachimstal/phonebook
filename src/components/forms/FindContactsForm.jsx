@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../redux/actions';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const FindContacts = () => {
   const dispatch = useDispatch();
@@ -11,16 +13,32 @@ export const FindContacts = () => {
   };
 
   return (
-    <label htmlFor="find" className="form-label">
-      Search by name:
-      <input
-        className="form-input"
-        type="text"
-        id="find"
-        name="filter"
-        value={filteredValue}
-        onChange={handleChange}
-      />
-    </label>
+    <div>
+      <div className="flex justify-end mr-28">
+        <form className="flex items-center">
+          <label htmlFor="find" className="sr-only">
+            Search contacts
+          </label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+              />
+            </div>
+            <input
+              type="text"
+              id="find"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search contacts"
+              required
+              name="filter"
+              value={filteredValue}
+              onChange={handleChange}
+            />
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };

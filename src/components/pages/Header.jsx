@@ -16,8 +16,8 @@ const Header = () => {
   };
 
   return (
-    <nav className="flex border-gray-200 bg-gray-900">
-      <div className="flex flex-wrap items-center p-4">
+    <nav className="flex border-gray-200 bg-gray-900 mx-20">
+      <div className="flex flex-wrap items-center py-4">
         <NavLink to="/" className="flex items-center">
           <FontAwesomeIcon
             icon={faAddressBook}
@@ -28,7 +28,7 @@ const Header = () => {
           </span>
         </NavLink>
       </div>
-      <div className="flex ml-auto items-center p-4">
+      <div className="flex ml-auto items-center py-4">
         {!isSignedIn ? (
           <>
             <NavLink

@@ -6,7 +6,7 @@ import { Contacts } from './Contacts';
 
 const Phonebook = () => {
   return (
-    <div className="bg-gray-200 ">
+    <div className="bg-gray-900">
       <Section title="Add new contact">
         <ContactForm />
       </Section>
