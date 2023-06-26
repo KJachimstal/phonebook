@@ -38,7 +38,7 @@ export const Login = () => {
           <FontAwesomeIcon icon={faAddressBook} className="w-8 h-8 mr-2" />
           <span>PhoneBook</span>
         </NavLink>
-        <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
+        <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
           <div className="space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-white">
               Sing in to your account

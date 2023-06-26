@@ -7,6 +7,8 @@ import {
   selectCurrentUser,
 } from 'redux/selectors';
 import { fetchContacts, deleteContact } from 'redux/operations';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
@@ -45,13 +47,23 @@ export const Contacts = () => {
   };
 
   return (
-    <ul className="contacts-list">
-      {filteredContacts.map(({ name, phone, id }) => (
-        <li key={id} className="contact-item">
-          <span className="contact-name">{name}</span>
-          <span className="contact-phone">{phone}</span>
-          <button type="submit" onClick={() => handleDelete(id)} className="">
-            Delete
+    <ul className="flex flex-wrap gap-4">
+      {filteredContacts.map(({ name, number, id }) => (
+        <li
+          key={id}
+          className="max-w-xs p-6 border border-gray-700 rounded-lg shadow bg-gray-800 border-gray-700"
+        >
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">
+            {name}
+          </h5>
+          <p className="mb-3 font-normal text-gray-400">{number}</p>
+          <button
+            type="submit"
+            onClick={() => handleDelete(id)}
+            className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          >
+            <FontAwesomeIcon icon={faTrashAlt} />
+            <span className="ml-2">Delete contact</span>
           </button>
         </li>
       ))}

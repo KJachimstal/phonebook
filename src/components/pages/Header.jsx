@@ -16,7 +16,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="flex border-gray-200 bg-gray-900 max-w-screen-xl">
+    <nav className="flex border-gray-200 bg-gray-900">
       <div className=" flex flex-wrap items-center p-4">
         <NavLink to="/" className="flex items-center">
           <FontAwesomeIcon
