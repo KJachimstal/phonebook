@@ -25,6 +25,7 @@ export const ContactForm = () => {
 
     if (filteredContacts.length !== 0) {
       alert(`${newContact.name} is already in contacts!`);
+      return;
     }
 
     dispatch(addContact(newContact));
@@ -40,36 +41,51 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="comtainer">
-      <label htmlFor="name" className="form-label">
-        Name
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          id="name"
-          className="form-input"
-          value={name}
-          onChange={handleChangeName}
-        />
-      </label>
-      <label htmlFor="number" className="form-label">
-        Number
-        <input
-          type="tel"
-          name="phone"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          id="phone"
-          className="form-input"
-          value={number}
-          onChange={handleChangeNumber}
-        />
-      </label>
-      <button type="submit" className="form-button">
+    <form onSubmit={handleSubmit}>
+      <div class="grid md:grid-cols-2 md:gap-6">
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+            value={name}
+            onChange={handleChangeName}
+          />
+          <label
+            for="name"
+            className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            Name
+          </label>
+        </div>
+        <div class="relative z-0 w-full mb-6 group">
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+            value={number}
+            onChange={handleChangeNumber}
+          />
+          <label
+            for="number"
+            className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            Phone
+          </label>
+        </div>
+      </div>
+      <button
+        type="submit"
+        className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+      >
         Add contact
       </button>
     </form>

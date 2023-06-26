@@ -51,7 +51,7 @@ export const Contacts = () => {
       {filteredContacts.map(({ name, number, id }) => (
         <li
           key={id}
-          className="max-w-xs p-6 border border-gray-700 rounded-lg shadow bg-gray-800 border-gray-700"
+          className="max-w-xs p-6 border border-gray-700 rounded-lg shadow bg-gray-700 border-gray-700"
         >
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">
             {name}

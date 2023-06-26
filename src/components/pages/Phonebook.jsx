@@ -6,15 +6,13 @@ import { Contacts } from './Contacts';
 
 const Phonebook = () => {
   return (
-    <>
-      <Section title="Phonebook">
+    <div className="bg-gray-200 ">
+      <Section title="Add new contact">
         <ContactForm />
       </Section>
-      <Section title="My contacts">
-        <FindContacts />
-        <Contacts />
-      </Section>
-    </>
+      <FindContacts />
+      <Contacts />
+    </div>
   );
 };
 
