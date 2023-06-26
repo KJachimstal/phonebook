@@ -35,7 +35,7 @@ export const Login = () => {
           to="/"
           className="flex items-center mb-6 text-2xl font-bold text-white"
         >
-          <FontAwesomeIcon icon={faAddressBook} className="w-8 h-8 mr-2" />{' '}
+          <FontAwesomeIcon icon={faAddressBook} className="w-8 h-8 mr-2" />
           <span>PhoneBook</span>
         </NavLink>
         <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
