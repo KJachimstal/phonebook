@@ -31,11 +31,19 @@ export const Contacts = () => {
   }, [filter, contacts]);
 
   if (isLoading) {
-    return <h4>Loading contacts...</h4>;
+    return (
+      <h4 className="p-4 text-center text-xl text-white text-bold">
+        Loading contacts...
+      </h4>
+    );
   }
 
   if (filteredContacts.length === 0) {
-    return <h4>No contacts available</h4>;
+    return (
+      <h4 className="p-4 text-center text-xl text-white text-bold">
+        No contacts available
+      </h4>
+    );
   }
 
   const handleDelete = contactId => {

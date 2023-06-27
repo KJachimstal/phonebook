@@ -1,5 +1,3 @@
-import { faAddressBook } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -37,14 +35,7 @@ export const Register = () => {
   return (
     <section className="bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <NavLink
-          to="/"
-          className="flex items-center mb-6 text-2xl font-bold text-white"
-        >
-          <FontAwesomeIcon icon={faAddressBook} className="w-8 h-8 mr-2" />
-          <span>PhoneBook</span>
-        </NavLink>
-        <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
+        <div className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md p-4 xl:p-0 bg-gray-800 border-gray-700">
           <div className="space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-white">
               Register new account

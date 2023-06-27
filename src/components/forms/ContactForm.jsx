@@ -42,8 +42,8 @@ export const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="grid md:grid-cols-2 md:gap-6">
-        <div class="relative z-0 w-full mb-6 group">
+      <div className="grid md:grid-cols-2 md:gap-6">
+        <div className="relative z-0 w-full mb-6 group">
           <input
             type="text"
             name="name"
@@ -62,7 +62,7 @@ export const ContactForm = () => {
             Name
           </label>
         </div>
-        <div class="relative z-0 w-full mb-6 group">
+        <div className="relative z-0 w-full mb-6 group">
           <input
             type="tel"
             name="phone"
