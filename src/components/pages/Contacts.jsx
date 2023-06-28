@@ -4,7 +4,6 @@ import {
   selectContacts,
   selectFilter,
   selectContactsIsLoading,
-  selectCurrentUser,
 } from 'redux/selectors';
 import { fetchContacts, deleteContact } from 'redux/operations';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
@@ -13,7 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export const Contacts = () => {
   const dispatch = useDispatch();
   const [filteredContacts, setFilteredContacts] = useState([]);
-  const currentUser = useSelector(selectCurrentUser);
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectContactsIsLoading);
