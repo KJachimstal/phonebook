@@ -1,4 +1,8 @@
 import { faAddressBook } from '@fortawesome/free-regular-svg-icons';
+import {
+  faRightFromBracket,
+  faRightToBracket,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,9 +37,10 @@ const Header = () => {
           <>
             <NavLink
               to="/login"
-              className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+              className="text-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-4 py-2 text-center mr-3 md:mr-0 hover:bg-blue-600 focus:ring-blue-800 transition-colors"
             >
-              Login
+              <FontAwesomeIcon icon={faRightToBracket} className="mr-2" />
+              Sign in
             </NavLink>
           </>
         ) : (
@@ -45,9 +50,10 @@ const Header = () => {
             </span>
             <button
               onClick={handleSingOut}
-              className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+              className="text-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-4 py-2 text-center mr-3 md:mr-0 hover:bg-blue-600 focus:ring-blue-800 transition-colors"
             >
-              Logout
+              <FontAwesomeIcon icon={faRightFromBracket} className="mr-2" />
+              Sign out
             </button>
           </>
         )}
