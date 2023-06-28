@@ -16,7 +16,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="flex border-gray-200 bg-gray-900 mx-20">
+    <nav className="flex border-gray-200 bg-gray-900 container mx-auto">
       <div className="flex flex-wrap items-center py-4">
         <NavLink to="/" className="flex items-center">
           <FontAwesomeIcon
@@ -41,7 +41,7 @@ const Header = () => {
         ) : (
           <>
             <span className="mr-4 text-white font-semibold">
-              {currentUser.user.name}
+              {currentUser.name}
             </span>
             <button
               onClick={handleSingOut}

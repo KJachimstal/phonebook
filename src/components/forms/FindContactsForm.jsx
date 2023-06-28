@@ -14,7 +14,7 @@ export const FindContacts = () => {
 
   return (
     <div>
-      <div className="flex justify-end mr-28">
+      <div className="flex justify-end container mx-auto mb-8 mt-12">
         <form className="flex items-center">
           <label htmlFor="find" className="sr-only">
             Search contacts

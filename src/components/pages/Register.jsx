@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, Navigate } from 'react-router-dom';
+import { selectIsSignedIn } from 'redux/selectors';
 import { signUp } from 'redux/session';
 
 export const Register = () => {
@@ -8,6 +9,7 @@ export const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isSignedIn = useSelector(selectIsSignedIn);
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -32,6 +34,11 @@ export const Register = () => {
 
     dispatch(signUp(userCredentials));
   };
+
+  if (isSignedIn) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <section className="bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

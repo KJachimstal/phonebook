@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from 'redux/session';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
+import { selectIsSignedIn, selectSessionError } from 'redux/selectors';
 
 export const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const error = useSelector(selectSessionError);
+  const isSignedIn = useSelector(selectIsSignedIn);
 
   const handleEmailChange = event => {
     setEmail(event.target.value);
@@ -27,6 +30,10 @@ export const Login = () => {
     dispatch(signIn(userCredentials));
   };
 
+  if (isSignedIn) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <section className="bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -35,6 +42,9 @@ export const Login = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-white">
               Sing in to your account
             </h1>
+            {error && (
+              <p className="text-red-500 mt-2">Invalid email or password!</p>
+            )}
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <label

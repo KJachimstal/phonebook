@@ -42,8 +42,8 @@ export const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="grid md:grid-cols-2 md:gap-6">
-        <div className="relative z-0 w-full mb-6 group">
+      <div className="grid grid-cols-12 gap-x-8">
+        <div className="relative z-0 w-full group col-span-5 flex items-center">
           <input
             type="text"
             name="name"
@@ -56,13 +56,13 @@ export const ContactForm = () => {
             onChange={handleChangeName}
           />
           <label
-            for="name"
+            htmlFor="name"
             className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Name
           </label>
         </div>
-        <div className="relative z-0 w-full mb-6 group">
+        <div className="relative z-0 w-full group col-span-5 flex items-center">
           <input
             type="tel"
             name="phone"
@@ -75,19 +75,21 @@ export const ContactForm = () => {
             onChange={handleChangeNumber}
           />
           <label
-            for="number"
+            htmlFor="number"
             className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Phone
           </label>
         </div>
+        <div className="col-span-2 flex items-center">
+          <button
+            type="submit"
+            className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 block"
+          >
+            Add contact
+          </button>
+        </div>
       </div>
-      <button
-        type="submit"
-        className="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-      >
-        Add contact
-      </button>
     </form>
   );
 };

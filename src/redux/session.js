@@ -19,6 +19,7 @@ export const signIn = createAsyncThunk(
           },
         }
       );
+      localStorage.setItem('userToken', response.data.token);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -28,8 +29,9 @@ export const signIn = createAsyncThunk(
 
 export const singOut = createAsyncThunk(
   'session/singOut',
-  async (token, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
+      const token = localStorage.getItem('userToken');
       const response = await axios.post(
         '/users/logout',
         {},
@@ -39,6 +41,7 @@ export const singOut = createAsyncThunk(
           },
         }
       );
+      localStorage.removeItem('userToken');
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -63,6 +66,23 @@ export const signUp = createAsyncThunk(
           },
         }
       );
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const currentUser = createAsyncThunk(
+  'session/currentUser',
+  async (_, thunkAPI) => {
+    try {
+      const token = localStorage.getItem('userToken');
+      const response = await axios.get('/users/current', {
+        headers: {
+          Authorization: token,
+        },
+      });
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

@@ -19,8 +19,8 @@ export const Contacts = () => {
   const isLoading = useSelector(selectContactsIsLoading);
 
   useEffect(() => {
-    dispatch(fetchContacts(currentUser.token));
-  }, [dispatch, currentUser]);
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   useEffect(() => {
     setFilteredContacts(
@@ -55,23 +55,22 @@ export const Contacts = () => {
   };
 
   return (
-    <ul className="flex flex-wrap justify-center gap-4 mx-20 py-6">
+    <ul className="grid grid-cols-12 gap-4 container mx-auto mb-24">
       {filteredContacts.map(({ name, number, id }) => (
         <li
           key={id}
-          className="max-w-xs p-6 border border-gray-700 rounded-lg shadow bg-gray-700 border-gray-700"
+          className="col-span-3 p-6 border border-gray-700 rounded-lg shadow bg-gray-700 border-gray-700 relative"
         >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">
+          <h5 className="mb-2 text-xl font-bold tracking-tight text-white">
             {name}
           </h5>
-          <p className="mb-3 font-normal text-gray-400">{number}</p>
+          <p className="font-normal text-gray-400 text-xl">{number}</p>
           <button
             type="submit"
             onClick={() => handleDelete(id)}
-            className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            className="focus:outline-none text-gray-400 hover:text-red-500 hover:bg-gray-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1 focus:ring-red-900 absolute top-2 right-2"
           >
             <FontAwesomeIcon icon={faTrashAlt} />
-            <span className="ml-2">Delete contact</span>
           </button>
         </li>
       ))}

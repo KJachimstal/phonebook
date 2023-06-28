@@ -3,8 +3,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
-  async (token, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
+      const token = localStorage.getItem('userToken');
       const response = await axios.get('/contacts', {
         headers: {
           Authorization: token,
@@ -41,7 +42,6 @@ export const addContact = createAsyncThunk(
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async ({ id, token }, thunkAPI) => {
-    console.log(id, token);
     try {
       const response = await axios.delete(`/contacts/${id}`, {
         headers: {

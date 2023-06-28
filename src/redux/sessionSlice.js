@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signIn, singOut } from './session';
+import { currentUser, signIn, singOut } from './session';
 
 const sessionInitialState = {
   currentUser: {},
   isSignedIn: false,
   isLoading: false,
-  error: null,
+  error: false,
 };
 
 const sessionSlice = createSlice({
@@ -15,26 +15,44 @@ const sessionSlice = createSlice({
   extraReducers: {
     [signIn.pending](state) {
       state.isLoading = true;
-      state.error = null;
+      state.error = false;
     },
     [signIn.fulfilled](state, action) {
       state.isLoading = false;
-      state.error = null;
+      state.error = false;
       state.currentUser = action.payload;
       state.isSignedIn = true;
     },
-    [signIn.rejected](state, action) {
+    [signIn.rejected](state) {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = true;
     },
-    [singOut.pending](state) {},
+    [singOut.pending](state) {
+      state.isLoading = true;
+    },
     [singOut.fulfilled](state) {
       state.currentUser = {};
+      state.isLoading = false;
       state.isSignedIn = false;
-      state.error = null;
+      state.error = false;
     },
-    [singOut.rejected](state, action) {
-      state.error = action.payload;
+    [singOut.rejected](state) {
+      state.error = true;
+      state.isLoading = false;
+    },
+    [currentUser.pending](state) {
+      state.isLoading = true;
+      state.error = false;
+    },
+    [currentUser.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = false;
+      state.currentUser = action.payload;
+      state.isSignedIn = true;
+    },
+    [currentUser.rejected](state) {
+      state.isLoading = false;
+      state.error = true;
     },
   },
 });

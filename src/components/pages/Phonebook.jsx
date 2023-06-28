@@ -28,9 +28,11 @@ const Phonebook = () => {
 
   return (
     <div className="bg-gray-900">
-      <Section title="Add new contact">
-        <ContactForm />
-      </Section>
+      <div className="my-8">
+        <Section title="Add new contact">
+          <ContactForm />
+        </Section>
+      </div>
       <FindContacts />
       <Contacts />
     </div>
