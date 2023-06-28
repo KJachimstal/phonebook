@@ -12,7 +12,7 @@ const Header = () => {
   const currentUser = useSelector(selectCurrentUser);
 
   const handleSingOut = () => {
-    dispatch(singOut(currentUser.token));
+    dispatch(singOut());
   };
 
   return (

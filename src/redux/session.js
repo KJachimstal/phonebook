@@ -1,13 +1,11 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+import api from 'utils/api';
 
 export const signIn = createAsyncThunk(
   'session/singIn',
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         '/users/login',
         {
           email,
@@ -31,16 +29,7 @@ export const singOut = createAsyncThunk(
   'session/singOut',
   async (_, thunkAPI) => {
     try {
-      const token = localStorage.getItem('userToken');
-      const response = await axios.post(
-        '/users/logout',
-        {},
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
+      const response = await api.post('/users/logout');
       localStorage.removeItem('userToken');
       return response.data;
     } catch (e) {
@@ -53,7 +42,7 @@ export const signUp = createAsyncThunk(
   'session/signUp',
   async ({ name, email, password }, thunkAPI) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         '/users/signup',
         {
           name,
@@ -77,12 +66,7 @@ export const currentUser = createAsyncThunk(
   'session/currentUser',
   async (_, thunkAPI) => {
     try {
-      const token = localStorage.getItem('userToken');
-      const response = await axios.get('/users/current', {
-        headers: {
-          Authorization: token,
-        },
-      });
+      const response = await api.get('/users/current');
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

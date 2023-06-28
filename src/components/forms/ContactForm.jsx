@@ -16,7 +16,6 @@ export const ContactForm = () => {
     const newContact = {
       name: form.elements.name.value,
       number: form.elements.phone.value,
-      token: currentUser.token,
     };
 
     const filteredContacts = contacts.filter(contact =>

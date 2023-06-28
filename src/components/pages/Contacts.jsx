@@ -49,7 +49,6 @@ export const Contacts = () => {
   const handleDelete = contactId => {
     const contact = {
       id: contactId,
-      token: currentUser.token,
     };
     dispatch(deleteContact(contact));
   };
