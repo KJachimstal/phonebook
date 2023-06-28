@@ -4,7 +4,11 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 const api = axios.create({
   headers: {
-    Authorization: localStorage.getItem('userToken'),
+    Authorization: {
+      toString() {
+        return localStorage.getItem('userToken');
+      },
+    },
   },
 });
 

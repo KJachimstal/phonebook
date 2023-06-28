@@ -20,7 +20,7 @@ const sessionSlice = createSlice({
     [signIn.fulfilled](state, action) {
       state.isLoading = false;
       state.error = false;
-      state.currentUser = action.payload;
+      state.currentUser = action.payload.user;
       state.isSignedIn = true;
     },
     [signIn.rejected](state) {

@@ -12,7 +12,9 @@ export const App = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(currentUser());
+    if (localStorage.getItem('userToken')) {
+      dispatch(currentUser());
+    }
   }, [dispatch]);
 
   return (
