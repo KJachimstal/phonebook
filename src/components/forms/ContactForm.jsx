@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/operations';
 import { useState } from 'react';
 import { selectContacts } from 'redux/selectors';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import Notiflix from 'notiflix';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -27,11 +29,16 @@ export const ContactForm = () => {
     );
 
     if (filteredContacts.length !== 0) {
-      alert(`${newContact.name} is already in contacts!`);
+      Report.failure(
+        `Canno't add new contact`,
+        `${newContact.name} is already in contacts!`,
+        'Confirm'
+      );
       return;
     }
 
     dispatch(addContact(newContact));
+    Notiflix.Notify.success('New contact was added!');
     resetForm();
   };
 
