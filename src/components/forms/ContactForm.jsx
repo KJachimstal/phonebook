@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/operations';
 import { useState } from 'react';
-import { selectContacts, selectCurrentUser } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const contacts = useSelector(selectContacts);
-  const currentUser = useSelector(selectCurrentUser);
+
+  const resetForm = () => {
+    setName('');
+    setNumber('');
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -28,7 +32,7 @@ export const ContactForm = () => {
     }
 
     dispatch(addContact(newContact));
-    form.reset();
+    resetForm();
   };
 
   const handleChangeName = async event => {

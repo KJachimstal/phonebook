@@ -8,8 +8,6 @@ export const selectContactsIsLoading = state => state.contacts.isLoading;
 
 export const selectCurrentUser = state => state.session.currentUser;
 
-export const selectCurrentUserToken = state => state.session.currentUser.token;
-
 export const selectIsSignedIn = state => state.session.isSignedIn;
 
 export const selectSessionError = state => state.session.error;
