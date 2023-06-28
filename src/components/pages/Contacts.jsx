@@ -8,6 +8,7 @@ import {
 import { fetchContacts, deleteContact } from 'redux/operations';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Notiflix from 'notiflix';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ export const Contacts = () => {
       id: contactId,
     };
     dispatch(deleteContact(contact));
+    Notiflix.Notify.success('Contact was deleted');
   };
 
   return (
