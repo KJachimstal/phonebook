@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'utils/api';
+import { updateContactItem } from './actions';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -53,6 +54,7 @@ export const updateContact = createAsyncThunk(
         name,
         number,
       });
+      thunkAPI.dispatch(updateContactItem(response.data));
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

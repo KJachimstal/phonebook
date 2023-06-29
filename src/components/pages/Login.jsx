@@ -21,13 +21,7 @@ export const Login = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userCredentials = {
-      email: form.elements.email.value,
-      password: form.elements.password.value,
-    };
-
-    dispatch(signIn(userCredentials));
+    dispatch(signIn({ email, password }));
   };
 
   if (isSignedIn) {

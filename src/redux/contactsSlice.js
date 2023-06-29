@@ -5,11 +5,26 @@ const contactsInitialState = {
   items: [],
   isLoading: false,
   error: null,
+  contactId: null,
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
+
+  reducers: {
+    setContactId(state, action) {
+      state.contactId = action.payload;
+    },
+
+    updateContactItem(state, action) {
+      state.items = [
+        ...state.items.map(contact =>
+          contact.id === action.payload.id ? action.payload : contact
+        ),
+      ];
+    },
+  },
 
   extraReducers: {
     [fetchContacts.pending](state) {

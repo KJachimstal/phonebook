@@ -25,14 +25,7 @@ export const Register = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const form = event.target;
-    const userCredentials = {
-      name: form.elements.name.value,
-      email: form.elements.email.value,
-      password: form.elements.password.value,
-    };
-
-    dispatch(signUp(userCredentials));
+    dispatch(signUp({ name, email, password }));
   };
 
   if (isSignedIn) {

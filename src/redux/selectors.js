@@ -11,3 +11,5 @@ export const selectCurrentUser = state => state.session.currentUser;
 export const selectIsSignedIn = state => state.session.isSignedIn;
 
 export const selectSessionError = state => state.session.error;
+
+export const selectContactId = state => state.contacts.contactId;
