@@ -12,7 +12,6 @@ const EditContactModal = ({ isOpen, onCloseModal }) => {
   );
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  console.log(contact);
   const dispatch = useDispatch();
 
   useEffect(() => {
