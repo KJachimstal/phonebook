@@ -55,6 +55,7 @@ export const signUp = createAsyncThunk(
           },
         }
       );
+      thunkAPI.dispatch(signIn({ email, password }));
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

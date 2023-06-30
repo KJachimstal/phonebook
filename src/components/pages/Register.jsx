@@ -1,8 +1,9 @@
+import { faDisplay } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
 import { selectIsSignedIn } from 'redux/selectors';
-import { signUp } from 'redux/session';
+import { signIn, signUp } from 'redux/session';
 
 export const Register = () => {
   const dispatch = useDispatch();
