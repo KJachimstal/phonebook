@@ -35,7 +35,7 @@ export const Register = () => {
   }, [dispatch]);
 
   if (isSignedIn) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/phonebook" replace />;
   }
 
   return (

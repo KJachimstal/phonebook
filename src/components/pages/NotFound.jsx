@@ -17,7 +17,7 @@ const NotFound = () => {
             home page.{' '}
           </p>
           <NavLink
-            to="/"
+            to="/phonebook"
             className="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:ring-primary-900 my-4"
           >
             Back to Homepage

@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <nav className="flex border-gray-200 bg-gray-900 container mx-auto">
       <div className="flex flex-wrap items-center py-4">
-        <NavLink to="/" className="flex items-center">
+        <NavLink to="/phonebook" className="flex items-center">
           <FontAwesomeIcon
             icon={faAddressBook}
             className="h-8 mr-3 text-white"
