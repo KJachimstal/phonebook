@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
+import { resetErrors } from 'redux/actions';
 import { selectIsSignedIn, selectSessionError } from 'redux/selectors';
 import { signUp } from 'redux/session';
 
@@ -28,6 +29,10 @@ export const Register = () => {
     event.preventDefault();
     dispatch(signUp({ name, email, password }));
   };
+
+  useEffect(() => {
+    dispatch(resetErrors());
+  }, [dispatch]);
 
   if (isSignedIn) {
     return <Navigate to="/" replace />;
@@ -65,7 +70,7 @@ export const Register = () => {
                 Your email
                 <input
                   className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500
-                  ${error.emial && `border-red-700`} `}
+                  ${error.email && `border-red-700`} `}
                   type="text"
                   name="email"
                   id="email"

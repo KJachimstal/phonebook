@@ -16,3 +16,5 @@ export const updateContactItem = createAction(
   'contacts/updateContactItem',
   contact => ({ payload: contact })
 );
+
+export const resetErrors = createAction('session/resetErrors');

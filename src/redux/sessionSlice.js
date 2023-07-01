@@ -12,6 +12,12 @@ const sessionSlice = createSlice({
   name: 'session',
   initialState: sessionInitialState,
 
+  reducers: {
+    resetErrors(state) {
+      state.error = false;
+    },
+  },
+
   extraReducers: {
     [signIn.pending](state) {
       state.isLoading = true;

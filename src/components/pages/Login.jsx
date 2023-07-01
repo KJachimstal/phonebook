@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from 'redux/session';
 import { NavLink, Navigate } from 'react-router-dom';
 import { selectIsSignedIn, selectSessionError } from 'redux/selectors';
+import { resetErrors } from 'redux/actions';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,10 @@ export const Login = () => {
     event.preventDefault();
     dispatch(signIn({ email, password }));
   };
+
+  useEffect(() => {
+    dispatch(resetErrors());
+  }, [dispatch]);
 
   if (isSignedIn) {
     return <Navigate to="/" replace />;
