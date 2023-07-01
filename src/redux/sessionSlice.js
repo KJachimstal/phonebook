@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { currentUser, signIn, singOut } from './session';
+import { currentUser, signIn, signUp, singOut } from './session';
 
 const sessionInitialState = {
   currentUser: {},
@@ -53,6 +53,18 @@ const sessionSlice = createSlice({
     [currentUser.rejected](state) {
       state.isLoading = false;
       state.error = true;
+    },
+    [signUp.pending](state) {
+      state.isLoading = true;
+      state.error = false;
+    },
+    [signUp.fulfilled](state) {
+      state.isLoading = true;
+      state.error = false;
+    },
+    [signUp.rejected](state, action) {
+      state.isLoading = true;
+      state.error = action.payload;
     },
   },
 });

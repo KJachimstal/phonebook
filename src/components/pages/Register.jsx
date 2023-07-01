@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
-import { selectIsSignedIn } from 'redux/selectors';
+import { selectIsSignedIn, selectSessionError } from 'redux/selectors';
 import { signUp } from 'redux/session';
 
 export const Register = () => {
@@ -10,6 +10,7 @@ export const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isSignedIn = useSelector(selectIsSignedIn);
+  const error = useSelector(selectSessionError);
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -63,7 +64,8 @@ export const Register = () => {
               >
                 Your email
                 <input
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500
+                  ${error.emial && `border-red-700`} `}
                   type="text"
                   name="email"
                   id="email"
@@ -72,6 +74,9 @@ export const Register = () => {
                   value={email}
                   onChange={handleEmailChange}
                 />
+                {error.email && (
+                  <p className="text-red-500 mt-2">Incorrect email</p>
+                )}
               </label>
               <label
                 htmlFor="password"
@@ -79,7 +84,8 @@ export const Register = () => {
               >
                 Password
                 <input
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500
+                  ${error.password && `border-red-700`}`}
                   type="password"
                   name="password"
                   id="password"
@@ -88,6 +94,11 @@ export const Register = () => {
                   value={password}
                   onChange={handlePasswordChange}
                 />
+                {error.password && (
+                  <p className="text-red-500 mt-2">
+                    Password must contain at least 7 characters
+                  </p>
+                )}
               </label>
               <button
                 type="submit"
