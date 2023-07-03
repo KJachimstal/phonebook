@@ -71,7 +71,7 @@ export const Contacts = () => {
 
   return (
     <>
-      <ul className="grid grid-cols-12 gap-4 container mx-auto mb-24">
+      <ul className="grid md:grid-cols-12 gap-4 container mx-auto mb-24 md:px-4">
         {filteredContacts.map(({ name, number, id }) => (
           <li
             key={id}
