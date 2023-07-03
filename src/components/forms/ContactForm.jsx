@@ -52,13 +52,13 @@ export const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="grid grid-cols-12 gap-x-8">
-        <div className="relative z-0 w-full group col-span-5 flex items-center">
+      <div className="grid md:grid-cols-12 gap-x-8 px-4">
+        <div className="relative z-0 w-full group col-span-5 flex items-center mb-6 md:mb-0">
           <input
             type="text"
             name="name"
             id="name"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
             value={name}
@@ -71,12 +71,12 @@ export const ContactForm = () => {
             Name
           </label>
         </div>
-        <div className="relative z-0 w-full group col-span-5 flex items-center">
+        <div className="relative z-0 w-full group col-span-5 flex items-center mb-6 md:mb-0">
           <input
             type="tel"
             name="phone"
             id="phone"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
             value={number}

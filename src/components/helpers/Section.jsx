@@ -4,7 +4,7 @@ export const Section = props => {
   return (
     <div className="container mx-auto">
       <div className="">
-        <h1 className="flex items-center mb-6 text-2xl font-bold text-white">
+        <h1 className="flex items-center mb-6 text-2xl font-bold text-white pl-4">
           {props.title}
         </h1>
         {props.children}
