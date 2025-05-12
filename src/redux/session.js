@@ -1,26 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from 'utils/api';
+import { supabase } from '../utils/supabaseClient';
 
 export const signIn = createAsyncThunk(
-  'session/singIn',
+  'session/signIn',
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await api.post(
-        '/users/login',
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      localStorage.setItem('userToken', response.data.token);
-      return response.data;
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) throw error;
+
+      return {
+        user: data.user,
+        session: data.session,
+      };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(e.message || e);
     }
   }
 );
@@ -29,9 +25,10 @@ export const singOut = createAsyncThunk(
   'session/singOut',
   async (_, thunkAPI) => {
     try {
-      const response = await api.post('/users/logout');
-      localStorage.removeItem('userToken');
-      return response.data;
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+
+      return {};
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -42,23 +39,24 @@ export const signUp = createAsyncThunk(
   'session/signUp',
   async ({ name, email, password }, thunkAPI) => {
     try {
-      const response = await api.post(
-        '/users/signup',
-        {
-          name,
-          email,
-          password,
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { name },
         },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      thunkAPI.dispatch(signIn({ email, password }));
-      return response.data;
+      });
+
+      if (error) throw error;
+
+      await thunkAPI.dispatch(signIn({ email, password }));
+
+      return {
+        user: data.user,
+        session: data.session,
+      };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response.data.errors);
+      return thunkAPI.rejectWithValue(e.message || e);
     }
   }
 );
@@ -67,8 +65,11 @@ export const currentUser = createAsyncThunk(
   'session/currentUser',
   async (_, thunkAPI) => {
     try {
-      const response = await api.get('/users/current');
-      return response.data;
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error) throw error;
+
+      return data.user;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

@@ -56,12 +56,13 @@ export const Contacts = () => {
     );
   }
 
-  const handleDelete = contactId => {
-    const contact = {
-      id: contactId,
-    };
-    dispatch(deleteContact(contact));
-    Notiflix.Notify.success('Contact was deleted');
+  const handleDelete = async contactId => {
+    try {
+      await dispatch(deleteContact({ id: contactId }));
+      Notiflix.Notify.success('Contact was deleted');
+    } catch {
+      Notiflix.Notify.failure('Failed to delete contact');
+    }
   };
 
   const handleEdit = contactId => {
@@ -72,7 +73,7 @@ export const Contacts = () => {
   return (
     <>
       <ul className="grid md:grid-cols-12 gap-4 container mx-auto mb-24 px-4">
-        {filteredContacts.map(({ name, number, id }) => (
+        {filteredContacts.map(({ name, phone, id }) => (
           <li
             key={id}
             className="col-span-3 p-6 pr-10 border border-gray-700 rounded-lg shadow bg-gray-700 border-gray-700 relative"
@@ -80,18 +81,18 @@ export const Contacts = () => {
             <h5 className="mb-2 text-xl font-bold tracking-tight text-white">
               {name}
             </h5>
-            <p className="font-normal text-gray-400 text-xl">{number}</p>
+            <p className="font-normal text-gray-400 text-xl">{phone}</p>
             <button
-              type="submit"
+              type="button"
               onClick={() => handleDelete(id)}
               className="focus:outline-none text-gray-400 hover:text-red-500 hover:bg-gray-800 font-medium rounded-lg text-sm px-2 py-1 focus:ring-red-900 absolute top-2 right-2"
             >
               <FontAwesomeIcon icon={faTrashAlt} />
             </button>
             <button
-              type="submit"
+              type="button"
               onClick={() => handleEdit(id)}
-              className="focus:outline-none text-gray-400 hover:text-white hover:bg-gray-800  font-medium rounded-lg text-sm px-2 py-1 focus:ring-gray-900 absolute top-10 right-2"
+              className="focus:outline-none text-gray-400 hover:text-white hover:bg-gray-800 font-medium rounded-lg text-sm px-2 py-1 focus:ring-gray-900 absolute top-10 right-2"
             >
               <FontAwesomeIcon icon={faPen} />
             </button>

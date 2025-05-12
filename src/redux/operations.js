@@ -1,13 +1,26 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from 'utils/api';
+import { supabase } from '../utils/supabaseClient';
 import { updateContactItem } from './actions';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await api.get('/contacts');
-      return response.data;
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) throw userError;
+
+      const { data, error } = await supabase
+        .from('contacts')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -18,16 +31,27 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async ({ name, number }, thunkAPI) => {
     try {
-      const response = await api.post(
-        '/contacts',
-        { name, number },
-        {
-          headers: {
-            'Content-Type': 'application/json',
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+      if (userError) throw userError;
+
+      const { data, error } = await supabase
+        .from('contacts')
+        .insert([
+          {
+            name,
+            phone: number,
+            user_id: user.id,
           },
-        }
-      );
-      return response.data;
+        ])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -38,8 +62,16 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async ({ id }, thunkAPI) => {
     try {
-      const response = await api.delete(`/contacts/${id}`);
-      return response.data;
+      const { data, error } = await supabase
+        .from('contacts')
+        .delete()
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -50,12 +82,20 @@ export const updateContact = createAsyncThunk(
   'contacts/updateContact',
   async ({ id, name, number }, thunkAPI) => {
     try {
-      const response = await api.patch(`/contacts/${id}`, {
-        name,
-        number,
-      });
-      thunkAPI.dispatch(updateContactItem(response.data));
-      return response.data;
+      const { data, error } = await supabase
+        .from('contacts')
+        .update({
+          name,
+          phone: number,
+        })
+        .eq('id', id)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      thunkAPI.dispatch(updateContactItem(data));
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }

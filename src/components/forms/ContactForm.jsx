@@ -8,46 +8,56 @@ import Notiflix from 'notiflix';
 export const ContactForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const contacts = useSelector(selectContacts);
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const form = event.target;
+
     const newContact = {
-      name: form.elements.name.value,
-      number: form.elements.phone.value,
+      name: form.elements.name.value.trim(),
+      phone: form.elements.phone.value.trim(),
     };
 
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(newContact.name.toLowerCase())
+    const isDuplicate = contacts.some(
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    if (filteredContacts.length !== 0) {
+    if (isDuplicate) {
       Report.failure(
-        `Canno't add new contact`,
+        `Can't add contact`,
         `${newContact.name} is already in contacts!`,
         'Confirm'
       );
       return;
     }
 
-    dispatch(addContact(newContact));
-    Notiflix.Notify.success('New contact was added!');
-    resetForm();
+    try {
+      const action = await dispatch(addContact(newContact));
+
+      if (addContact.fulfilled.match(action)) {
+        Notiflix.Notify.success('New contact was added!');
+        resetForm();
+      } else {
+        throw new Error(action.error.message);
+      }
+    } catch (err) {
+      Report.failure('Error', err.message || 'Something went wrong', 'Close');
+    }
   };
 
-  const handleChangeName = async event => {
-    await setName(event.target.value);
+  const handleChangeName = event => {
+    setName(event.target.value);
   };
 
-  const handleChangeNumber = async event => {
-    await setNumber(event.target.value);
+  const handleChangePhone = event => {
+    setPhone(event.target.value);
   };
 
   return (
@@ -79,11 +89,11 @@ export const ContactForm = () => {
             className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 appearance-none border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0 peer"
             placeholder=" "
             required
-            value={number}
-            onChange={handleChangeNumber}
+            value={phone}
+            onChange={handleChangePhone}
           />
           <label
-            htmlFor="number"
+            htmlFor="phone"
             className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Phone

@@ -21,6 +21,7 @@ export const App = props => {
     <>
       <Header />
       <Routes>
+        <Route path="/" element={<Phonebook />} />
         <Route path="phonebook" element={<Phonebook />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

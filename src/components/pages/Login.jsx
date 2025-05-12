@@ -20,10 +20,19 @@ export const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(signIn({ email, password }));
+
+    const action = await dispatch(signIn({ email, password }));
+
+    if (signIn.fulfilled.match(action)) {
+      const session = action.payload?.session;
+      if (session?.access_token) {
+        localStorage.setItem('userToken', session.access_token);
+      }
+    }
   };
+
 
   useEffect(() => {
     dispatch(resetErrors());

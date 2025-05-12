@@ -25,9 +25,17 @@ export const Register = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(signUp({ name, email, password }));
+
+    const action = await dispatch(signUp({ name, email, password }));
+
+    if (signUp.fulfilled.match(action)) {
+      const session = action.payload?.session;
+      if (session?.access_token) {
+        localStorage.setItem('userToken', session.access_token);
+      }
+    }
   };
 
   useEffect(() => {
@@ -113,7 +121,7 @@ export const Register = () => {
               </button>
               <div className="flex items-center">
                 <p className="block text-sm font-ligth text-gray-400">
-                  Do you have accound?
+                  Do you have account?
                 </p>
                 <NavLink
                   to="/login"
